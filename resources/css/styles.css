@@ -1,0 +1,506 @@
+/*====================================*/
+/*===========DEFAULT SETUP============*/
+/*====================================*/
+/*ctrl a k f : phím tắt canh chỉnh văn bản*/
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+html {
+    background-color: #ffffff;
+    color: #5a5a5a;
+    font-family: 'Lato', sans-serif;
+    font-size: 20px;
+    text-rendering: optimizeLegibility; /*hiển thị văn bản trong các trang web. */
+    /* mặc định là 16px*/
+}
+
+body{
+    overflow-x: hidden; /* xóa khoảng trắng bên phải của hidden khi kéo thanh ngang */
+}
+
+/*========================================================*/
+/*=====================REUSABLE COMPONENT=================*/
+/*========================================================*/
+
+.btn{
+    text-decoration: none; /* xóa thuộc tính của thẻ a*/
+    color: white;
+    background-color: #e67e22;
+    padding: 15px 30px; /*khoảng cách giữa chữ với viền btn*/
+    border-radius: 20px; /* làm tròn viền btn */
+    margin: 0 5px; /* khoảng cách giữa hai btn*/
+    width: 190px;
+    display: inline-block; /* thẻ a là display inline hiển thị trên
+                            cùng một hàng ko thể chỉnh width cũng như high
+                            vì thế dùng inline-block */
+    text-align: center; /*canh giữa chữ btn*/
+    transition: all .3s; /* tất cả thuộc tính thay đổi khi hover vào btn*/
+
+}
+
+.btn:hover,
+.btn:active{
+    background-color: #d35400;
+}
+
+.clearfix::after{  /*  kĩ thuật giúp cho element không chứa thuộc tính float, không phải chịu ảnh hưởng
+    của các phần tử chứa thuộc tính float gần nó.  */
+    content: "";    
+    display: table;
+    clear: both;
+}
+
+
+.row{
+    max-width: 1140px;  /* nội dung lớn nhất có thể chứa */
+    margin: 0 auto; /*Khoảng cách từ đường viền (Border) của phần tử này đến các phần tử khác hoặc các phần của trang Web (viền trang web),
+                    bao quanh bốn mặt của Border. */
+
+}
+
+h1, h2, h3{
+    text-transform: uppercase;/* tất cả in hoa*/
+                    /*lowercase tất cả in thường */
+    letter-spacing: 1px; /* khoảng cách giữa các chữ cái vs nhau*/
+}
+
+h1{
+    font-size: 300%; /* kích thước font 300*/
+    font-weight: 400;
+    word-spacing: 5px; /* khoảng cách giữa các từ với nhau*/
+    line-height: 135%; /*khoảng cách giữa các dòng*/
+    color: white;
+    margin-bottom: 50px; /*khoảng cách giữa h1 vs btn */
+}
+
+h2{
+    color: #e67e22;
+    font-size: 180%;
+    font-weight: 700;
+    text-align: center;
+}
+
+h2::after{ /* dòng kẻ mờ dưới h2  */
+    content: " ";
+    display: block;
+    width: 150px;
+    height: 3px;
+    background-color: rgba(230,126,34,0.5);
+    margin: 0 auto; /* canh giữa*/
+    margin-top: 5px; /* khoảng cách với about us là 5px*/
+}
+
+h3{
+    padding-top: 30px;
+    padding-bottom: 10px;
+    text-align: center;
+    background-color: #265077;
+    color: white;
+    border-top-right-radius: 10px; /* bo tròn viền của h3 */
+    border-top-left-radius: 10px;
+    margin-bottom: 15px; /* khoảng cách dưới của h3 */
+}
+
+.p-long{
+    text-align: center;
+    color: #265077;
+    font-size: 22px;
+    margin-top: 40px;   /* margin top vs bottom đều bằng 40 để canh khoảng cách trên dưới  */
+    margin-bottom: 40px;
+    width: 70%;      /* width 70 thì p-long sẽ bị lệch sang trái nên ta dùng margin left 15% */
+    margin-left: 15%;
+    word-spacing: 2px; /* khoảng cách giữa các từ vs nhau*/
+}
+
+section{ 
+    padding: 50px; /* khoảng cách với phần header bên trên là 50 ta dùng padding */
+}
+
+.small-icon{
+    color: #305679;
+    font-size: 130%;
+    margin-right: 10px;
+}
+
+/*========================================================*/
+/*========================HEADER==========================*/
+/*========================================================*/
+
+header{
+    background-image: linear-gradient(45deg, rgba(2,33,64,0.8) 55%, rgba(45,95,93,0.85)) ,url(../img/background4.jpeg);
+    /* linear-gradient pha màu : red green blue
+     <alpha> mờ màu tôn backpround lên */ 
+    background-size: cover; /*bao trùm toàn bộ view html */
+    background-position: center; /* canh giữa background */
+    height: 100vh;
+    /*50hv là chiếm 1/2 web , 100hv toàn web */ 
+    background-attachment: fixed; /*hiệu ứng cố định background khi di chuyển web lên xuống*/
+}
+
+.logo {
+    width: 350px;
+    float: left; /*xác định rằng một phần tử HTML nên được đặt dọc theo bên trái
+                 hay bên phải của vùng chứa của nó*/
+    margin-left: 70px;  
+    margin-top: -50px; /*canh chỉnh khoảng cách để logo gần top */
+}
+
+.main-nav{
+    float: right; /* di chuyển sát lề bên phải */
+    list-style: none; /* xóa ký hiệu danh sách của thẻ <li> */
+    margin-right: 50px; /* cách lề phải 50 */
+    margin-top: 55px; /* cách top 55 */
+}
+
+.main-nav li{ /* thẻ <li> mặc định là <display: block>: sắp theo chiều dọc */
+    display: inline-block; /* kiểu <display: inline-block> : 
+                            các items sẽ được xếp cùng nhau trên một dòng */
+    margin-right: 30px; /*khoảng cách giữa các list link */    
+}
+
+.main-nav li a{
+    text-decoration: none; /*xóa hiệu ứng gạch chân mặc định của thẻ <a>*/
+    color: white;
+    font-size: 110%; /* tăng kích thước cho list link*/
+    font-weight: 700;
+    transition: border-bottom 0.5s; /* thời gian delay của dòng kẻ dưới */
+    padding: 3px 0; /* khoảng cách dòng kẻ vs link */
+}
+
+.main-nav li a:hover, /* hành động di chuyển vào vị trí sẽ
+                    xuất hiện dòng kẻ dưới */
+.main-nav li a:active{
+    border-bottom: 2px solid #cccccc;
+}
+
+
+
+.heading-main-box{
+    position: absolute; /*  position:absolute của một phần tử liên quan đến vị trí của thẻ cha
+                            và thay đổi bố cục xung quanh vị trí đó */
+    top: 50%; /* canh giữa trên 50 dưới 50 */
+    left: 50%;
+    transform: translate(-50%, -55%); /* thay đổi chiều ngang và chiều dọc mà nó chiếm */
+    width: 1140px;
+
+}
+
+/*=====================================*/
+/*============STICKY===================*/
+/*=====================================*/
+
+.sticky{
+    background-color: rgba(2,33,64,.9);
+    position: fixed; /* hỗ trợ cho hiệu ứng croll hàm hình kéo đến đâu nó sẽ theo đến đó */
+    z-index: 900;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+}
+.sticky .logo{
+    width: 250px;
+    margin-top: -40px;
+}
+.sticky .main-nav{
+    margin-top: 30px;
+}
+/*=====================================*/
+/*============ABOUT SECTION============*/
+/*=====================================*/
+
+.about-picture{
+    position: relative; /* gán position relative vào thẻ about picture để sử dụng position absolute */
+    margin-top: 50px;
+}
+
+.about-picture img{ 
+    width: 90%; /* ảnh sẽ chiếm 90 col của thẻ dev */
+    border-radius: 20px;
+    border: 4px solid #c2e1fd;
+    box-shadow: 0px 5px 15px 5px #265077; /* x-y-độ mờ-độ phóng rộng-màu */ 
+    transition: all .8s; /* thời gian chờ sau khi hover vào để màu ảnh thay đổi*/
+}
+
+.picture-tilte{
+    position: absolute; /* khi gán position absolute nó sẽ di chuyển theo thẻ cha có gán position relative */
+    top: 50%;
+    left: 50%;
+    color: #c2e1fd;
+    transform: translate(-65%,100%); /*di chuyển chữ trong picture ra giữa */
+    opacity: 0; /* độ mờ của dòng chữ trong ảnh trước khi hover */
+    transition: all .8s; /* thời gian chờ sau khi hover vào để màu dòng chữ trong ảnh thay đổi*/
+}
+
+.about-picture:hover img,
+.about-picture:active img { /* sau khi hover vào ảnh thì filter: brightness(55%) blur(2px) sẽ hoạt động làm mờ ảnh */
+    filter: brightness(55%) blur(2px); /*  filter: blur(px) thuộc tính này làm mờ ảnh  */
+                                         /*   filter: brightness(%) thuộc tính làm sáng ảnh */
+
+}
+
+.about-picture:hover .picture-tilte, /* khi hover vào picture thì ảnh sẽ mờ và dòng chữ trong nó sẽ di chuyển theo số liệu transform: translate*/
+.about-picture:active .picture-tilte {
+    transform: translate(-65%,-50%);
+    opacity: 1; /* độ mờ của dòng chữ sau khi hover */
+}
+
+/*====================================================*/
+/*==================PRODUCT SECTION===================*/
+/*====================================================*/
+
+.products-section{
+    background-color: #f4f4f4;
+}
+
+.products-section h2{
+    margin-bottom: 60px;
+}
+.product-box{
+    background-color: #eeefff;
+    box-shadow: 3px 5px 10px #e0e0e0; /* x-y-độ mờ-độ phóng rộng-màu */ 
+    width: 90%;
+    height: 350px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+.product-price{
+    color: #265077;
+    font-size: 250%; /* kích thước của chữ */
+    font-weight: 300; /* độ mỏng của font chữ */
+    text-align: center;
+}
+
+.product-price span{
+    font-size: 80%;
+}
+
+.product-box ul li {
+    margin-left: 20%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    list-style: none;
+
+}
+
+.product-box .btn{
+    margin-left: 20%;
+}
+
+/*========================================================*/
+/*=====================TESTIMONIALS SECTION===============*/
+/*========================================================*/
+
+
+.testimonials-section{
+    background-image: linear-gradient(45deg, rgba(2,33,64,0.8) 55%, rgba(45,95,93,0.85)), url(../img/background2.jpeg);
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.testimonials-section h2{
+    margin-bottom: 70px;
+}
+
+blockquote{
+    width: 95%;
+    position: relative;  /* gán position relative vào thẻ about picture để sử dụng position absolute */
+    font-size: italic; /* italic  chữ in nghiêng và kích thước chữ vừa văn bản  */
+    line-height: 140%;
+    color: white;
+}
+
+blockquote::before{
+    content: '\201c';
+    display: block;
+    font-size: 400%;
+    position: absolute; /*  position:absolute của một phần tử liên quan đến vị trí của thẻ cha
+                        và thay đổi bố cục xung quanh vị trí đó */
+    top: -10px; /* lệch lên trên -10px ra khỏi blockquote */
+    left: -10px; /* lệch qua trái -10px ra khỏi blockquote */
+}
+
+cite{
+    display: block; /* mặc định của  <display: block>: sắp theo chiều dọc */
+    color: #6b95bd;
+    margin-top: 25px;
+}
+
+cite img {
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid #265077 ;
+    vertical-align: middle; /* thuộc tính này canh giữa theo chiều dọc */
+    margin-right: 10px;
+}
+
+
+/*========================================================*/
+/*=====================SPONSORS SECTION===================*/
+/*========================================================*/
+
+.sponsors-section{
+    background-color: #f4f4f4;
+}
+
+.sponsors-section h2{
+    margin-bottom: 50px;
+}
+
+.sponsors-showcase{
+    margin-left: 10%;
+}
+.sponsors-showcase li {
+    list-style: none;
+    float: left; /* dùng để vô hiệu thuộc tính của li */ 
+    width: 30%;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.logo-sponsor{
+    width: 140px;
+    cursor: pointer; /* khi hover vào logo sẽ hiện lên con chuột hình bàn tay */
+    transition: all .3s; /* khi hover vào logo thì thời gian phóng to của logo là 3s */
+}
+
+.sponsors-showcase li .logo-sponsor:hover,
+.sponsors-showcase li .logo-sponsor:active{
+    transform: scale(1.1); /* khi hover vào logo hình sẽ phóng to ra 1.1 */
+}
+
+figcaption{
+    color: #265077;
+    font-weight: 900;
+    font-size: 120%;
+    cursor: pointer; /* khi hover vào logo sẽ hiện lên con chuột hình bàn tay */
+}
+
+/*========================================================*/
+/*=====================CONTACT FORM=======================*/
+/*========================================================*/
+
+.contact-section{
+    background-image: linear-gradient(45deg, rgba(2,33,64,0.8) 55%, rgba(45,95,93,0.85)), url(../img/background5.jpeg);
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.information{
+    list-style: none;
+    color: white;
+    line-height: 200%;
+    margin-top: 70px;
+    word-spacing: 1px;
+    font-size: 95%;
+}
+
+.information .small-icon{
+    color: #6b95bd;
+}
+
+.information .small-icon:hover,
+.information .small-icon:active{
+    transform: scale(1.4);
+}
+
+.social-icons{
+    margin-top: 50px;
+}
+.social-icons li{
+    display: inline-block;
+    font-size: 250%;
+    margin-left: 20px;
+    color: white;
+}
+
+.social-icons li i{
+    transition: all .3s;
+    cursor: pointer;
+}
+
+.social-icons li i:hover,
+.social-icons li i:active{
+    transform: scale(1.4);
+    color: #d35400;
+}
+
+
+/*========================================================*/
+/*=====================FORM===============================*/
+/*========================================================*/
+
+form{
+    background-color: rgba(0,0,0,.4);
+    width: 68%;
+    margin-left: 40%;
+    padding: 20px;
+    border-radius: 30px;
+    margin-bottom: 40px;
+}
+
+form .row{
+    margin-bottom: 20px;
+}
+
+label{
+    font-size: 150%;
+    color: white;
+}
+
+input, textarea{
+    outline: none; /* xóa thuộc tính outline mặc định */
+    padding: 10px; /* kích thước sẽ tăng lên */
+    background-color: rgba(48, 47, 47, .3);
+    border: 1px solid rgba(70, 68, 68, .7);
+    margin-left: 40px; /* khoảng cách trái vs label  */
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+textarea{
+    resize: none; /* xóa thuộc tính của viền mặc định bên trong góc phải dưới */
+    height: 100px;
+}
+
+input{
+    height: 50px;
+}
+
+input[type=text], input[type=email], textarea{
+    width: 80%;
+    font-size: 100%; /* kích thước của chữ bên trong  */
+    transition: all .3s;
+}
+
+input[type=text]:focus, input[type=email]:focus , textarea:focus{ /* khi click chuột vào thì sẽ đổi màu */
+    color: white;
+    background-color: rgba(48,47,47,.8);
+}
+
+form .row:last-child{
+    text-align: center; /* last-child là dòng row cuối cùng của thẻ  */
+}
+
+input[type=submit]{
+    font-weight: 700;
+    font-size: 100%; /* kích thước bên trong cả chữ lẫn putton */
+    border-radius: 5px;
+    width: 60%;
+}
+
+/*========================================================*/
+/*=====================FOOTER SECTION=====================*/
+/*========================================================*/
+
+footer{
+    text-align: center;
+    background-color: #494949;
+    color: white;
+    padding: 20px; /* dùng để tăng kích thước của footer lên 20px */
+}
